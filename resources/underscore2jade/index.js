@@ -1,5 +1,7 @@
 let converter = require('./converter');
-require('./styles');
+require('common/github-light');
+require('common/normalize');
+require('common/styles');
 
 document.addEventListener('DOMContentLoaded', () => {
 	let htmlTextarea = document.querySelector('textarea[name="html"]'),

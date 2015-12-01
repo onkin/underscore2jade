@@ -1,19 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
 	<meta charset="UTF-8">
-	<title>underscore2jade</title>
-	<link rel="stylesheet" href="assets/underscore2jade.css"/>
+	<title>underscore2jade by onkin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="assets/underscore2jade.css" media="screen">
 </head>
 <body>
-	<div class="content">
-		<div class="textarea-wrapper">
-			<textarea class="textarea" name="html" placeholder="html"></textarea>
-		</div>
-		<div class="textarea-wrapper">
-			<textarea class="textarea" name="jade" placeholder="jade" readonly="readonly"></textarea>
-		</div>
+<section class="page-header">
+	<h1 class="project-name">underscore2jade</h1>
+
+	<h2 class="project-tagline">underscore to jade converter</h2>
+	<a href="https://github.com/onkin/underscore2jade" class="btn">View on GitHub</a>
+	<a href="https://github.com/onkin/underscore2jade/zipball/master" class="btn">Download .zip</a>
+	<a href="https://github.com/onkin/underscore2jade/tarball/master" class="btn">Download .tar.gz</a>
+</section>
+<section class="content">
+	<div class="textarea-wrapper">
+		<textarea class="textarea" name="html" placeholder="underscore"></textarea>
 	</div>
-	<script type="text/javascript" src="assets/underscore2jade.js"></script>
+	<div class="textarea-wrapper">
+		<textarea class="textarea" name="jade" placeholder="jade" readonly="readonly"></textarea>
+	</div>
+</section>
+<section class="main-content">
+	<h1>
+		<a id="underscore2jade" class="anchor" href="#underscore2jade" aria-hidden="true"><span
+				class="octicon octicon-link"></span></a>underscore2jade</h1>
+
+	<p>underscore to jade converter</p>
+
+	<div class="highlight highlight-source-js"><pre><span class="pl-k">let</span> converter <span class="pl-k">=</span> <span
+			class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>./converter<span
+			class="pl-pds">'</span></span>);
+<span class="pl-smi">converter()</span>.<span class="pl-en">convert</span>(underscoreTemplate);</pre>
+	</div>
+
+	<h2>
+		<a id="underscore-template" class="anchor" href="#underscore-template" aria-hidden="true"><span
+				class="octicon octicon-link"></span></a>Underscore template</h2>
+
+	<div class="highlight highlight-text-html-basic">
+		<pre>&lt;<span class="pl-ent">span</span> <span class="pl-e">class</span>=<span class="pl-s"><span
+				class="pl-pds">"</span>test<span class="pl-pds">"</span></span> <span class="pl-e">data-id</span>=<span
+				class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span> <span
+				class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span> <span
+				class="pl-e">data-name</span>=<span class="pl-s"><span
+				class="pl-pds">"</span>&lt;%= name + 12 %&gt;<span class="pl-pds">"</span></span>&gt;&lt;%= value %&gt;&lt;/<span
+				class="pl-ent">span</span>&gt;</pre>
+	</div>
+
+	<h2>
+		<a id="jade-template" class="anchor" href="#jade-template" aria-hidden="true"><span
+				class="octicon octicon-link"></span></a>Jade template</h2>
+
+	<div class="highlight highlight-text-jade"><pre>span<span class="pl-c1">#test</span><span class="pl-c1">.test</span><span
+			class="pl-c1">(</span><span class="pl-e">data-id</span>=<span class="pl-s">'1'</span>, <span class="pl-e">data-name</span>=name <span
+			class="pl-k">+</span> <span class="pl-c1">12</span><span class="pl-c1">)</span>
+  | <span class="pl-s">!{value}</span></pre>
+	</div>
+
+	<footer class="site-footer">
+		<span class="site-footer-owner">
+			<a href="https://github.com/onkin/underscore2jade">underscore2jade</a>
+			is maintained by <a	href="https://github.com/onkin">onkin</a>.
+		</span>
+	</footer>
+
+</section>
+<script type="text/javascript" src="assets/underscore2jade.js"></script>
 </body>
 </html>

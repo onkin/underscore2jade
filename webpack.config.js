@@ -1,4 +1,4 @@
-﻿const release = process.env.NODE_ENV == 'release';
+﻿const isProduction = process.env.NODE_ENV == 'production';
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -64,15 +64,19 @@ module.exports = {
 	},
 
 	plugins: [
-		new webpack.ContextReplacementPlugin(/node_modules[\/\\]moment[\/\\]locale/, /en/),
-		new ExtractTextPlugin('[name].css'),
-		//new webpack.optimize.UglifyJsPlugin({
-		//	compress: {
-		//		warnings: false,
-		//		unsafe: true
-		//	}
-		//})
+		new ExtractTextPlugin('[name].css')
 	],
 
-	devtool: 'source-map'
+	devtool: isProduction ? 'cheap-source-map' : 'source-map'
 };
+
+if (isProduction) {
+	module.exports.plugins.push(
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false,
+				unsafe: true
+			}
+		})
+	);
+}
