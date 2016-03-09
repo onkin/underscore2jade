@@ -1,6 +1,8 @@
 # underscore2jade
 underscore to jade converter
 
+[![Build Status](https://travis-ci.org/onkin/underscore2jade.svg?branch=master)](https://travis-ci.org/onkin/underscore2jade)
+
 ```js
 let converter = require('./converter');
 let jadeTemplate = converter(/* options */).convert(underscoreTemplate);
