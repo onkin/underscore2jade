@@ -1,8 +1,21 @@
+git:
+    depth: 1
+
+sudo: false
+
 language: node_js
+
+cache:
+    directories:
+        - node_modules
+
 node_js:
-    - "v5.6.0"
+    - "5"
+
 branches:
     only:
         - master
 before_script:
-    - npm install -g webpack
+    - ". ./jscs.sh"
+script:
+    - "npm run travis"
