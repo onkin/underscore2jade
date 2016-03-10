@@ -2,12 +2,12 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+console.log(__dirname);
 module.exports = {
     context: path.join(__dirname, 'resources'),
 
     entry: {
-        underscore2jade: 'underscore2jade'
+        underscore2jade: 'index'
     },
 
     output: {

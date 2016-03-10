@@ -1,7 +1,7 @@
-let converter = require('./converter');
-require('common/github-light');
-require('common/normalize');
-require('common/styles');
+let converter = require('underscore2jade');
+require('github-light');
+require('normalize');
+require('styles');
 
 document.addEventListener('DOMContentLoaded', () => {
     let htmlTextarea = document.querySelector('textarea[name="html"]');

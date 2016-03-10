@@ -6,5 +6,5 @@
     "disallowMultipleLineBreaks": null,
     "validateLineBreaks" : null,
     "maximumLineLength": 200,
-    "excludeFiles": ["**/node_modules/**", "**/assets/**"]
+    "excludeFiles": ["**/node_modules/**", "**/sample/**"]
 }
