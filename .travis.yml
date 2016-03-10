@@ -16,6 +16,6 @@ branches:
     only:
         - master
 before_script:
-    - ". ./jscs.sh"
+    - "make codestyle"
 script:
-    - "npm run travis"
+    - "make travis"
