@@ -1,3 +1,5 @@
+'use strict';
+
 let evaluateTagname;
 let throwTagname;
 let templateSettings;
@@ -106,7 +108,8 @@ let process = (tagTree, indentLevel, list) => {
 };
 
 
-module.exports = (options = {}) => {
+module.exports = (options) => {
+    options || (options = {});
     evaluateTagname = options.evaluateTagname || 'scriptinjection';
     throwTagname = options.throwTagname || 'throwinjection';
     templateSettings = options.templateSettings || require('lodash/templateSettings');

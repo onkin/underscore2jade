@@ -172,13 +172,11 @@
 	    return list;
 	};
 	
-	module.exports = function () {
-	    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
+	module.exports = function (options) {
+	    options || (options = {});
 	    evaluateTagname = options.evaluateTagname || 'scriptinjection';
 	    throwTagname = options.throwTagname || 'throwinjection';
 	    templateSettings = options.templateSettings || __webpack_require__(93);
-	
 	    return {
 	        convert: function convert(html) {
 	            var content = cleanContent(html);
