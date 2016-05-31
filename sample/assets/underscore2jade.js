@@ -47,9 +47,9 @@
 	'use strict';
 	
 	var converter = __webpack_require__(1);
-	__webpack_require__(105);
-	__webpack_require__(109);
-	__webpack_require__(111);
+	__webpack_require__(106);
+	__webpack_require__(110);
+	__webpack_require__(112);
 	
 	document.addEventListener('DOMContentLoaded', function () {
 	    var htmlTextarea = document.querySelector('textarea[name="html"]');
@@ -28920,9 +28920,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var escape = __webpack_require__(94),
-	    reEscape = __webpack_require__(102),
-	    reEvaluate = __webpack_require__(103),
-	    reInterpolate = __webpack_require__(104);
+	    reEscape = __webpack_require__(103),
+	    reEvaluate = __webpack_require__(104),
+	    reInterpolate = __webpack_require__(105);
 	
 	/**
 	 * By default, the template delimiters used by lodash are like those in
@@ -29008,20 +29008,22 @@
 	 *
 	 * Though the ">" character is escaped for symmetry, characters like
 	 * ">" and "/" don't need escaping in HTML and have no special meaning
-	 * unless they're part of a tag or unquoted attribute value.
-	 * See [Mathias Bynens's article](https://mathiasbynens.be/notes/ambiguous-ampersands)
+	 * unless they're part of a tag or unquoted attribute value. See
+	 * [Mathias Bynens's article](https://mathiasbynens.be/notes/ambiguous-ampersands)
 	 * (under "semi-related fun fact") for more details.
 	 *
 	 * Backticks are escaped because in IE < 9, they can break out of
 	 * attribute values or HTML comments. See [#59](https://html5sec.org/#59),
 	 * [#102](https://html5sec.org/#102), [#108](https://html5sec.org/#108), and
-	 * [#133](https://html5sec.org/#133) of the [HTML5 Security Cheatsheet](https://html5sec.org/)
-	 * for more details.
+	 * [#133](https://html5sec.org/#133) of the
+	 * [HTML5 Security Cheatsheet](https://html5sec.org/) for more details.
 	 *
-	 * When working with HTML you should always [quote attribute values](http://wonko.com/post/html-escaping)
-	 * to reduce XSS vectors.
+	 * When working with HTML you should always
+	 * [quote attribute values](http://wonko.com/post/html-escaping) to reduce
+	 * XSS vectors.
 	 *
 	 * @static
+	 * @since 0.1.0
 	 * @memberOf _
 	 * @category String
 	 * @param {string} [string=''] The string to escape.
@@ -29073,22 +29075,15 @@
 /* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Symbol = __webpack_require__(97),
-	    isSymbol = __webpack_require__(100);
-	
-	/** Used as references for various `Number` constants. */
-	var INFINITY = 1 / 0;
-	
-	/** Used to convert symbols to primitives and strings. */
-	var symbolProto = Symbol ? Symbol.prototype : undefined,
-	    symbolToString = symbolProto ? symbolProto.toString : undefined;
+	var baseToString = __webpack_require__(97);
 	
 	/**
-	 * Converts `value` to a string if it's not one. An empty string is returned
-	 * for `null` and `undefined` values. The sign of `-0` is preserved.
+	 * Converts `value` to a string. An empty string is returned for `null`
+	 * and `undefined` values. The sign of `-0` is preserved.
 	 *
 	 * @static
 	 * @memberOf _
+	 * @since 4.0.0
 	 * @category Lang
 	 * @param {*} value The value to process.
 	 * @returns {string} Returns the string.
@@ -29104,18 +29099,7 @@
 	 * // => '1,2,3'
 	 */
 	function toString(value) {
-	  // Exit early for strings to avoid a performance hit in some environments.
-	  if (typeof value == 'string') {
-	    return value;
-	  }
-	  if (value == null) {
-	    return '';
-	  }
-	  if (isSymbol(value)) {
-	    return symbolToString ? symbolToString.call(value) : '';
-	  }
-	  var result = (value + '');
-	  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+	  return value == null ? '' : baseToString(value);
 	}
 	
 	module.exports = toString;
@@ -29125,7 +29109,44 @@
 /* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var root = __webpack_require__(98);
+	var Symbol = __webpack_require__(98),
+	    isSymbol = __webpack_require__(101);
+	
+	/** Used as references for various `Number` constants. */
+	var INFINITY = 1 / 0;
+	
+	/** Used to convert symbols to primitives and strings. */
+	var symbolProto = Symbol ? Symbol.prototype : undefined,
+	    symbolToString = symbolProto ? symbolProto.toString : undefined;
+	
+	/**
+	 * The base implementation of `_.toString` which doesn't convert nullish
+	 * values to empty strings.
+	 *
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {string} Returns the string.
+	 */
+	function baseToString(value) {
+	  // Exit early for strings to avoid a performance hit in some environments.
+	  if (typeof value == 'string') {
+	    return value;
+	  }
+	  if (isSymbol(value)) {
+	    return symbolToString ? symbolToString.call(value) : '';
+	  }
+	  var result = (value + '');
+	  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+	}
+	
+	module.exports = baseToString;
+
+
+/***/ },
+/* 98 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var root = __webpack_require__(99);
 	
 	/** Built-in value references. */
 	var Symbol = root.Symbol;
@@ -29134,55 +29155,29 @@
 
 
 /***/ },
-/* 98 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(module, global) {var checkGlobal = __webpack_require__(99);
-	
-	/** Used to determine if values are of the language type `Object`. */
-	var objectTypes = {
-	  'function': true,
-	  'object': true
-	};
-	
-	/** Detect free variable `exports`. */
-	var freeExports = (objectTypes[typeof exports] && exports && !exports.nodeType)
-	  ? exports
-	  : undefined;
-	
-	/** Detect free variable `module`. */
-	var freeModule = (objectTypes[typeof module] && module && !module.nodeType)
-	  ? module
-	  : undefined;
+	/* WEBPACK VAR INJECTION */(function(global) {var checkGlobal = __webpack_require__(100);
 	
 	/** Detect free variable `global` from Node.js. */
-	var freeGlobal = checkGlobal(freeExports && freeModule && typeof global == 'object' && global);
+	var freeGlobal = checkGlobal(typeof global == 'object' && global);
 	
 	/** Detect free variable `self`. */
-	var freeSelf = checkGlobal(objectTypes[typeof self] && self);
-	
-	/** Detect free variable `window`. */
-	var freeWindow = checkGlobal(objectTypes[typeof window] && window);
+	var freeSelf = checkGlobal(typeof self == 'object' && self);
 	
 	/** Detect `this` as the global object. */
-	var thisGlobal = checkGlobal(objectTypes[typeof this] && this);
+	var thisGlobal = checkGlobal(typeof this == 'object' && this);
 	
-	/**
-	 * Used as a reference to the global object.
-	 *
-	 * The `this` value is used if it's the global object to avoid Greasemonkey's
-	 * restricted `window` object, otherwise the `window` object is used.
-	 */
-	var root = freeGlobal ||
-	  ((freeWindow !== (thisGlobal && thisGlobal.window)) && freeWindow) ||
-	    freeSelf || thisGlobal || Function('return this')();
+	/** Used as a reference to the global object. */
+	var root = freeGlobal || freeSelf || thisGlobal || Function('return this')();
 	
 	module.exports = root;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(65)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 99 */
+/* 100 */
 /***/ function(module, exports) {
 
 	/**
@@ -29200,10 +29195,10 @@
 
 
 /***/ },
-/* 100 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObjectLike = __webpack_require__(101);
+	var isObjectLike = __webpack_require__(102);
 	
 	/** `Object#toString` result references. */
 	var symbolTag = '[object Symbol]';
@@ -29212,7 +29207,8 @@
 	var objectProto = Object.prototype;
 	
 	/**
-	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
 	 * of values.
 	 */
 	var objectToString = objectProto.toString;
@@ -29222,9 +29218,11 @@
 	 *
 	 * @static
 	 * @memberOf _
+	 * @since 4.0.0
 	 * @category Lang
 	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified,
+	 *  else `false`.
 	 * @example
 	 *
 	 * _.isSymbol(Symbol.iterator);
@@ -29242,7 +29240,7 @@
 
 
 /***/ },
-/* 101 */
+/* 102 */
 /***/ function(module, exports) {
 
 	/**
@@ -29251,6 +29249,7 @@
 	 *
 	 * @static
 	 * @memberOf _
+	 * @since 4.0.0
 	 * @category Lang
 	 * @param {*} value The value to check.
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
@@ -29276,7 +29275,7 @@
 
 
 /***/ },
-/* 102 */
+/* 103 */
 /***/ function(module, exports) {
 
 	/** Used to match template delimiters. */
@@ -29286,7 +29285,7 @@
 
 
 /***/ },
-/* 103 */
+/* 104 */
 /***/ function(module, exports) {
 
 	/** Used to match template delimiters. */
@@ -29296,7 +29295,7 @@
 
 
 /***/ },
-/* 104 */
+/* 105 */
 /***/ function(module, exports) {
 
 	/** Used to match template delimiters. */
@@ -29306,23 +29305,23 @@
 
 
 /***/ },
-/* 105 */
+/* 106 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 106 */,
 /* 107 */,
 /* 108 */,
-/* 109 */
+/* 109 */,
+/* 110 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 110 */,
-/* 111 */
+/* 111 */,
+/* 112 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
