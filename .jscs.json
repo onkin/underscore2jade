@@ -1,0 +1,10 @@
+{
+    "preset": "yandex",
+    "requireLineFeedAtFileEnd": null,
+    "disallowImplicitTypeConversion": null,
+    "disallowSpacesInFunctionDeclaration": null,
+    "disallowMultipleLineBreaks": null,
+    "validateLineBreaks" : null,
+    "maximumLineLength": 200,
+    "excludeFiles": ["**/node_modules/**", "**/sample/**"]
+}

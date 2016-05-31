@@ -1,0 +1,21 @@
+git:
+    depth: 1
+
+sudo: false
+
+language: node_js
+
+cache:
+    directories:
+        - node_modules
+
+node_js:
+    - "5"
+
+branches:
+    only:
+        - master
+before_script:
+    - "make codestyle"
+script:
+    - "make travis"
